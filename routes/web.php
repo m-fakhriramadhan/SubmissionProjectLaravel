@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProdukController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -68,6 +69,22 @@ Route::prefix('petugas')->name('petugas.')->group(function () {
 Route::redirect('/home', '/');
 
 Route::permanentRedirect('/katalog-lama', '/info');
+
+//controller & blade
+Route::get('/produk', [ProdukController::class, 'index'])
+    ->name('produk.index');
+
+Route::get('/produk/{id}', [ProdukController::class, 'show'])
+    ->name('produk.show');
+
+
+
+
+Route::get('/produk/tambah', [ProdukController::class, 'create'])
+    ->name('produk.create');
+
+Route::post('/produk', [ProdukController::class, 'store'])
+    ->name('produk.store');
 
 Route::fallback(function () {
     return response('Maaf, halaman yang Anda cari tidak tersedia.', 404);
