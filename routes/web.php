@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\JurusanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ProductController;
+
+use App\Http\Controllers\MatakuliahController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -79,12 +83,47 @@ Route::get('/produk/{id}', [ProdukController::class, 'show'])
 
 
 
-
 Route::get('/produk/tambah', [ProdukController::class, 'create'])
     ->name('produk.create');
 
 Route::post('/produk', [ProdukController::class, 'store'])
     ->name('produk.store');
+
+
+/*Route::get('products',[ProductController::class,'index']);
+
+Route::get('products/{id}',funtion ($id) {
+    return 'Produk #'. $id;
+});*/
+
+//pertemuan 6
+Route::get('/jurusan', [JurusanController::class, 'index'])
+    ->name('jurusan.index');
+
+Route::get('/jurusan/create', [JurusanController::class, 'create'])
+    ->name('jurusan.create');
+
+Route::post('/jurusan', [JurusanController::class, 'store'])
+    ->name('jurusan.store');
+
+
+Route::get('/jurusan/{id}', [JurusanController::class, 'show']);
+
+Route::get('/products/{id}',[ProductController::class,'show']);
+
+// PENGELOLAAN DATA MATA KULIAH
+
+Route::get('/matakuliah', [MatakuliahController::class, 'index'])
+    ->name('matakuliah.index');
+
+Route::get('/matakuliah/create', [MatakuliahController::class, 'create'])
+    ->name('matakuliah.create');
+
+Route::post('/matakuliah', [MatakuliahController::class, 'store'])
+    ->name('matakuliah.store');
+
+Route::get('/matakuliah/{id}', [MatakuliahController::class, 'show'])
+    ->name('matakuliah.show');
 
 Route::fallback(function () {
     return response('Maaf, halaman yang Anda cari tidak tersedia.', 404);
